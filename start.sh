@@ -2,14 +2,13 @@
 
 build=${BRANCH}
 
-if [ ${build} == "beta" ]
+if [ ${BRANCH} == "public" ]
 then
-	# Expermental 
-	/steamcmd/steamcmd.sh +login anonymous +force_install_dir /7dtd +app_update 294420 -beta latest_experimental +quit
-
-else
 	# GA
 	/steamcmd/steamcmd.sh +login anonymous +force_install_dir /7dtd +app_update 294420 +quit
+else
+	# Expermental 
+	/steamcmd/steamcmd.sh +login anonymous +force_install_dir /7dtd +app_update 294420 -beta ${BRANCH} +quit
 fi
 
 if [ ! -f /7dtd/serverconfig_custom.xml ] 

@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 MAINTAINER antimodes201
 
@@ -20,6 +20,8 @@ RUN dpkg --add-architecture i386 && \
 		wget \
 		unzip \
 		tzdata \
+		lldb \
+		gdb \
 		ca-certificates && \
 		rm -rf /var/lib/apt/lists/*
 	
@@ -36,14 +38,6 @@ RUN adduser \
         && chown steamuser:steamuser /7dtd \
         && chown steamuser:steamuser /steamcmd \
 		&& chown steamuser:steamuser /scripts 
-
-# Install Steamcmd
-USER steamuser
-RUN cd /steamcmd && \
-	wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz && \
-	tar -xf steamcmd_linux.tar.gz && \
-	rm steamcmd_linux.tar.gz && \
-	/steamcmd/steamcmd.sh +quit
 	
 ADD start.sh /steamcmd/start.sh
 
